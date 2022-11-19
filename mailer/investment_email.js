@@ -1,25 +1,24 @@
 const nodemailer = require("nodemailer");
-
-let transporter = nodemailer.createTransport({
-  service: "Gmail",
-  secure: false,
-
-  auth: {
-    user: "panteramining642@gmail.com",
-    // pass: "desolidboy1",
-    pass: "cvqydopvaddyfnfi",
-    // secure:false,
-  },
-});
-
-let currentdate = new Date();
-let datetime = `${currentdate.getFullYear()}-${
-  currentdate.getMonth() + 1
-}-${currentdate.getDate()} ${currentdate.getHours()}: ${currentdate.getMinutes()} : ${currentdate.getSeconds()}`;
+const smtpTransport = require("nodemailer-smtp-transport");
+const { datetime } = require("./system-variables");
+const transporter = nodemailer.createTransport(
+  smtpTransport({
+    host: "mail.softjovial.com",
+    secureConnection: false,
+    tls: {
+      rejectUnauthorized: false,
+    },
+    port: 587,
+    auth: {
+      user: "support@softjovial.com",
+      pass: process.env.mail_password,
+    },
+  }),
+);
 
 let create_mail_options = (userInfo) => {
   return (mailOptions = {
-    from: "support@panteramining.com",
+    from: "support@softjovial.com",
     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever,
     subject: `Investment Confirmation Notification`,
@@ -28,29 +27,67 @@ let create_mail_options = (userInfo) => {
    <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Nunito&family=Roboto&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nunito+Sans:ital,wght@0,600;0,700;1,600&family=Nunito:ital,wght@0,200;0,300;1,200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@400;500&display=swap"
   rel="stylesheet"
 />
-<main    style="
-    font-family: 'Nunito', sans-serif;
-    font-family: 'Roboto', sans-serif;
-    background-image: url(https://edustair.com/assets/img/360_F_339709048_ZITR4wrVsOXCKdjHncdtabSNWpIhiaR7.jpg);
-    width: 100%;
-    background-size: cover;
-  "
->
+<main>
  
-  <div class="maincontainer"  style="
-    font-family: 'Nunito', sans-serif;
-    font-family: 'Roboto', sans-serif;
-    background-image: url(https://edustair.com/assets/img/360_F_339709048_ZITR4wrVsOXCKdjHncdtabSNWpIhiaR7.jpg);
-    width: 100%;
-    background-size: cover;
-  ">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nunito+Sans:ital,wght@0,600;0,700;1,600&family=Nunito:ital,wght@0,200;0,300;1,200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@400;500&display=swap');
+
+.maincontainer{
+font-family: 'Nanum Gothic Coding', monospace;
+font-family: 'Nunito', sans-serif;
+font-family: 'Nunito Sans', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Poppins', sans-serif;
+font-family: 'Roboto', sans-serif;
+      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      font-weight: 100;
+      line-height: 2.5;
+    }
+    .cordial {
+      font-size: 16px;
+    
+    }
+    .head-txt {
+      text-align: center;
+      background-color: #142c8e;
+      font-size: 20px;
+      color: #fff;
+    }
+    .paragraph-01,
+    .paragraph-02 {
+      font-size: 15.5px;
+      padding: 1px;
+    }
+    .paragraph-03 {
+      font-weight: 400;
+      font-size: 15.5px;
+      padding: 1px;
+      color: green;
+    }
+    .paragraph-04{
+      font-size: 15.5px;
+      padding: 1px; 
+    }
+    .disclaimer{
+        font-size: 12px;
+        font-weight: 700;
+        padding: 0px;
+    }
+    h1,h2,h4,h5,h6{
+        font-size: 18px;
+    }
+  </style>
+
     <div class="head-txt">
 <div class="head-txt">
-      <h1 style="text-align: center; font-size: 16px; color: #825ee4">
-        PANTERAMINING.COM
+      <h1 style="text-align: center; font-size: 16px; color: #0c0e28 ">
+       SOFTJOVIAL
       </h1>
       <h3 style="font-size: 15px;">DEPOSIT CONFIRMATION NOTIFICATION</h3>
     </div>
@@ -58,7 +95,7 @@ let create_mail_options = (userInfo) => {
     <p class="sm-p">
       Dear ${userInfo.first_name} ${userInfo.last_name}, thanks for creating an investment with us 
       on <b>${datetime}</b>.
-    We understand that you entrust your financial investment with us. We want to let you know that your investment is safe with us and we are entitled to give you the best service
+    We understand that you entrust your financial investment and trading with us. We want to let you know that your investment is safe with us and we are entitled to give you the best service
     </p>
     <p class="sm-p">
     NB:you can view /cancel all your investment anytime from your dashboard/investments.
@@ -74,16 +111,16 @@ let create_mail_options = (userInfo) => {
       style="
         font-size: 18px;
         text-align: center;
-        background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%);
-        color: #fff;
+        background: #eee;
+        color: #0c0e28 ;
       "
     >
-      PANTERAMINING.COM
+     SOFTJOVIAL.COM
     </h1>
     <p class="disclaimer" style="font-size: 12px; font-weight: bolder">
-      Disclaimer: this message was automatically generated via pantera mining
+      Disclaimer: this message was automatically generated via softjovial
       secured channel,please do not reply to this message all correspondence
-      should be addressed to panteramining.com or your relationship officer
+      should be addressed to softjovial.com or your relationship officer
     </p>
   </div>
 </main>
