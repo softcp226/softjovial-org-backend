@@ -3,20 +3,33 @@ const smtpTransport = require("nodemailer-smtp-transport");
 const { datetime } = require("./system-variables");
 require("dotenv").config();
 
-const transporter = nodemailer.createTransport(
-  smtpTransport({
-    host: "mail.softjovial.com",
-    secureConnection: false,
-    tls: {
-      rejectUnauthorized: false,
-    },
-    port: 587,
-    auth: {
-      user: "support@softjovial.com",
-      pass: process.env.mail_password,
-    },
-  }),
-);
+// const transporter = nodemailer.createTransport(
+//   smtpTransport({
+//     host: "mail.softjovial.com",
+//     secureConnection: false,
+//     tls: {
+//       rejectUnauthorized: false,
+//     },
+//     port: 587,
+//     auth: {
+//       user: "support@softjovial.com",
+//       pass: process.env.mail_password,
+//     },
+//   }),
+// );
+
+let transporter = nodemailer.createTransport({
+  service: "Gmail",
+  secure: false,
+
+  auth: {
+    user: "softjovial01@gmail.com",
+    // pass: "desolidboy1",
+    pass: "osahneclvayxjqnm",
+    // secure:false,
+  },
+});
+
 console.log(process.env.mail_password);
 let create_mail_options = (userInfo) => {
   return (mailOptions = {

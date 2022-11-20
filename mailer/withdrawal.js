@@ -1,13 +1,25 @@
 const nodemailer = require("nodemailer");
 
+// let transporter = nodemailer.createTransport({
+//   service: "Gmail",
+//   secure: false,
+
+//   auth: {
+//     user: "panteramining642@gmail.com",
+//     // pass: "desolidboy1",
+//     pass: "cvqydopvaddyfnfi",
+//     // secure:false,
+//   },
+// });
+
 let transporter = nodemailer.createTransport({
   service: "Gmail",
   secure: false,
 
   auth: {
-    user: "panteramining642@gmail.com",
+    user: "softjovial01@gmail.com",
     // pass: "desolidboy1",
-    pass: "cvqydopvaddyfnfi",
+    pass: "osahneclvayxjqnm",
     // secure:false,
   },
 });

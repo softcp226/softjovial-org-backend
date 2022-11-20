@@ -1,20 +1,19 @@
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const {datetime}=require("./system-variables")
-const transporter = nodemailer.createTransport(
-  smtpTransport({
-    host: "mail.softjovial.com",
-    secureConnection: false,
-    tls: {
-      rejectUnauthorized: false,
-    },
-    port: 587,
-    auth: {
-      user: "support@softjovial.com",
-      pass: "softjovial1@1",
-    },
-  }),
-);
+
+
+let transporter = nodemailer.createTransport({
+  service: "Gmail",
+  secure: false,
+
+  auth: {
+    user: "softjovial01@gmail.com",
+    // pass: "desolidboy1",
+    pass: "osahneclvayxjqnm",
+    // secure:false,
+  },
+});
 
 // let currentdate = new Date();
 // let datetime = `${currentdate.getFullYear()}-${
