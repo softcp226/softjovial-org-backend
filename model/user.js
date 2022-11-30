@@ -43,6 +43,10 @@ const userSchema = mongoose.Schema({
     default: false,
   },
   referral: String,
+  created_basic_investment_more_than_once: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const User = mongoose.model("user", userSchema);

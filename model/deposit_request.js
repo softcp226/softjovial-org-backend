@@ -13,10 +13,17 @@ const deposit_request_Schema = mongoose.Schema({
     type: Number,
     required: true,
   },
+
   payment_method: {
     type: String,
     required: true,
   },
+  payment_method_icon: String,
+  payment_wallet: {
+    type: String,
+    required: true,
+  },
+
   currency: {
     type: String,
     required: true,
@@ -31,6 +38,6 @@ const deposit_request_Schema = mongoose.Schema({
 
 const Deposit_request = mongoose.model(
   "deposit_request",
-  deposit_request_Schema
+  deposit_request_Schema,
 );
 module.exports = Deposit_request;

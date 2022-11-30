@@ -15,7 +15,7 @@ const { datetime } = require("./system-variables");
 //     },
 //   }),
 // );
-let transporter = nodemailer.createTransport({
+let transporter2 = nodemailer.createTransport({
   service: "Gmail",
   secure: false,
 

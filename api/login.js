@@ -7,6 +7,7 @@ const validateLogin = require("../validation/validateLogin");
 const check_investment_expiration_on_login = require("../api_func/check_investment_expiration_on_login");
 
 Router.post("/", async (req, res) => {
+console.log(req.body)
   const isvalid = validateLogin(req.body);
   if (isvalid != true)
     return res.status(400).json({ error: true, errMessage: isvalid });

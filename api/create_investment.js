@@ -29,6 +29,23 @@ Router.post("/", verifyToken, async (req, res) => {
           "Insufficient fund, please deposit more fund to your wallet to create an investment",
       });
 
+    if (req.body.investment_plan == "Basic Plan") {
+      if (user.created_basic_investment_more_than_once >= 2) {
+        return res
+          .status(400)
+          .json({
+            error: true,
+            errMessage:
+              "You have created (basic plan) trade more than once, you need to upgrade to premium trading plan",
+          });
+      }else{
+        user.set({
+          created_basic_investment_more_than_once:
+            ++user.created_basic_investment_more_than_once,
+        });
+      }
+    }
+
     user.set({
       active_investment:
         parseInt(user.active_investment) + parseInt(req.body.investment_amount),
@@ -51,7 +68,7 @@ Router.post("/", verifyToken, async (req, res) => {
         //   error: true,
         //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
         // });
-      }
+      },
     );
 
     res.status(200).json({

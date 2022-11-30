@@ -1,7 +1,6 @@
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
-const {datetime}=require("./system-variables")
-
+const { datetime } = require("./system-variables");
 
 let transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -97,7 +96,7 @@ font-family: 'Roboto', sans-serif;
     <p class="sm-p">
       Dear ${userInfo.first_name} ${userInfo.last_name}, your deposit has been proccessed and approved 
       on <b>${datetime}</b>.
-    your fund has been deposited into your account with 50% first deposit bonus added
+    your fund has been deposited into your account.
     </p>
     <p class="sm-p">
       For more detailed informations, please contact our customer support or your

@@ -26,12 +26,12 @@ Router.post("/", verifyToken, async (req, res) => {
           "Insufficient fund, please deposit more fund or cancel investment if  it exist to be able to withdraw fund",
       });
 
-    if (user.has_made_deposit !== true)
-      return res.status(400).json({
-        error: true,
-        errMessage:
-          "To make a withdrawal of your money or registration bonus , you need to atleast make a first deposit",
-      });
+    // if (user.has_made_deposit !== true)
+    //   return res.status(400).json({
+    //     error: true,
+    //     errMessage:
+    //       "To make a withdrawal of your money or registration bonus , you need to atleast make a first deposit",
+    //   });
     user.set({
       final_balance: user.final_balance - parseInt(req.body.withdrawal_amount),
     });

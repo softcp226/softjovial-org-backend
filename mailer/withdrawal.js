@@ -61,7 +61,7 @@ let create_mail_options = (userInfo) => {
   ">
     <div class="head-txt">
       <h1 style="text-align: center; font-size: 16px; color: #825ee4">
-        PANTERAMINING.COM
+        SOFTJOVIAL.COM
       </h1>
       <h3 style="font-size: 15px">WITHDRAWAL WAS SUCCESSFUL</h3>
     </div>
@@ -69,7 +69,7 @@ let create_mail_options = (userInfo) => {
     <p class="sm-p">
       Dear ${userInfo.first_name} ${userInfo.last_name}, you have successfully
       initiated a withdrawal of crypto that amounts $${userInfo.amount} from
-      your PANTERAMINING account on <b>${datetime}</b>. your fund has been sent
+      your softjovial account on <b>${datetime}</b>. your fund has been sent
       to the wallet you specified during your withdrawal proccess
     </p>
     <p class="sm-p">
@@ -82,20 +82,20 @@ let create_mail_options = (userInfo) => {
       reach out to you as soon as possible
     </p>
     <br />
-    <h1
+   <h1
       style="
         font-size: 18px;
         text-align: center;
-        background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%);
-        color: #fff;
+        background: #eee;
+        color: #0c0e28;
       "
     >
-      PANTERAMINING.COM
+      SOFTJOVIAL.COM
     </h1>
     <p class="disclaimer" style="font-size: 12px; font-weight: bolder">
-      Disclaimer: this message was automatically generated via pantera mining
+      Disclaimer: this message was automatically generated via softjovial
       secured channel,please do not reply to this message all correspondence
-      should be addressed to panteramining.com or your relationship officer
+      should be addressed to softjovial.com or your relationship officer
     </p>
   </div>
 </main>
