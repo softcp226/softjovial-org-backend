@@ -23,7 +23,6 @@ let transporter = nodemailer.createTransport({
     // secure:false,
   },
 });
-
 let currentdate = new Date();
 let datetime = `${currentdate.getFullYear()}-${
   currentdate.getMonth() + 1
@@ -31,7 +30,7 @@ let datetime = `${currentdate.getFullYear()}-${
 
 let create_mail_options = (userInfo) => {
   return (mailOptions = {
-    from: "support@panteramining.com",
+    from: "support@softjovial.com",
     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever,
     subject: `Withdrawal Confirmation Notification`,
@@ -70,11 +69,10 @@ let create_mail_options = (userInfo) => {
       Dear ${userInfo.first_name} ${userInfo.last_name}, you have successfully
       initiated a withdrawal of crypto that amounts $${userInfo.amount} from
       your softjovial account on <b>${datetime}</b>. your fund has been sent
-      to the wallet you specified during your withdrawal proccess
+      to the wallet you specified during your withdrawal proccess. 
     </p>
     <p class="sm-p">
-      NB: For more detailed informations, please contact our customer support or
-      your relationship officer
+      NB: It might up take up to 15 minutes for your funds to arrive.
     </p>
 
     <p class="sm-p">
