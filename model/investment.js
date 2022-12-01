@@ -21,7 +21,7 @@ const investment_schema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  investment_plan: {
+  currency: {
     type: String,
     required: true,
   },
