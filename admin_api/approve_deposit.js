@@ -2,6 +2,7 @@ const express = require("express");
 const Router = express.Router();
 const verifyToken = require("../secure-admin-api/verifyToken");
 const Deposit_request = require("../model/deposit_request");
+const Total_deposit = require("../model/total_deposit");
 const Transaction = require("../model/transaction");
 const Admin = require("../model/admin");
 
@@ -32,7 +33,7 @@ Router.post("/", verifyToken, async (req, res) => {
       });
 
     const deposit_request = await Deposit_request.findById(
-      req.body.deposit_request
+      req.body.deposit_request,
     );
     if (!deposit_request)
       return res.status(400).json({
@@ -81,17 +82,26 @@ Router.post("/", verifyToken, async (req, res) => {
           //   error: true,
           //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
           // });
-        }
+        },
       );
     }
     // let bonus = parseInt(req.body.deposit_amount) / 2;
     user.set({
       final_balance:
-        parseInt(user.final_balance) +
-        parseInt(req.body.deposit_amount),
+        parseInt(user.final_balance) + parseInt(req.body.deposit_amount),
       has_made_deposit: true,
     });
     transaction.set({ status: "success" });
+  
+
+    // const total_deposit = await Total_deposit.find();
+    // total_deposit[0].set({
+    //   total_deposit:
+    //     parseInt(total_deposit[0].total_deposit) +
+    //     parseInt(req.body.deposit_amount),
+    // });
+    // await total_deposit.save();
+
 
     await Deposit_request.findByIdAndDelete(req.body.deposit_request);
 
@@ -111,7 +121,7 @@ Router.post("/", verifyToken, async (req, res) => {
         //   error: true,
         //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
         // });
-      }
+      },
     );
     res
       .status(200)

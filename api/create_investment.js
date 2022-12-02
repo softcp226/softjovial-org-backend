@@ -29,30 +29,70 @@ Router.post("/", verifyToken, async (req, res) => {
           "Insufficient fund, please deposit more fund to your wallet to create an investment",
       });
 
-    if (req.body.investment_plan == "Basic Plan") {
-      if (user.created_basic_investment_more_than_once >= 2) {
-        return res
-          .status(400)
-          .json({
-            error: true,
-            errMessage:
-              "You have created (basic plan) trade more than once, you need to upgrade to premium trading plan",
-          });
-      }else{
-        user.set({
-          created_basic_investment_more_than_once:
-            ++user.created_basic_investment_more_than_once,
-        });
-      }
-    }
+    if (parseInt(req.body.investment_amount) < parseInt(user.min_investment))
+      return res.status(403).json({
+        error: true,
+        errMessage: `you can no longer create trades that are less than${user.min_investment} your account has been upgraded`,
+      });
+    //     if(user.created_same_investment_ealier >=1 && parseInt(req.body.investment_amount) < parseInt(user.prev_investment) * 2)return res
+    //       .status(403)
+    //       .json({
+    //         error: true,
+    //         errMessage: `you cant create trade that are less than $${
+    //           parseInt(user.prev_investment) * 2
+    //         } `,
+    //       });
+    //     if (
+    //       parseInt(user.created_same_investment_ealier) >= 2
+    //     ){
+
+    //       if(      parseInt(req.body.investment_amount) < parseInt(user.prev_investment) * 3
+    // ){return res.status(403).json({
+    //   error: true,
+    //   errMessage: `you can no longer create trades that are less than $${
+    //     user.prev_investment * 3
+    //   }. Your account has upgraded`,
+    // });
+    // }
+    //     }
+
+    //       // if (parseInt(user.prev_investment) > 0){
+    //  if (
+    //    parseInt(user.prev_investment * 2) >= parseInt(req.body.investment_amount)
+    //  ) {
+    //    user.set({
+    //      created_same_investment_ealier: ++user.created_same_investment_ealier,
+    //    });
+    // //  }else{
+    // //   user.set({
+    // //     created_same_investment_ealier: --user.created_same_investment_ealier,
+    // //   });
+    //  }
+    //       // }
+
+    //     // const check_created_same_investment_earlier = () => {
+    //     //   if (user.created_same_investment_ealier >= 2) return 0;
+    //     //   if (
+    //     //     parseInt(user.prev_investment * 2) <=
+    //     //     parseInt(req.body.investment_amount)
+    //     //   )
+    //     //     return ++user.created_same_investment_ealier;
+    //     // };
 
     user.set({
       active_investment:
         parseInt(user.active_investment) + parseInt(req.body.investment_amount),
       final_balance: user.final_balance - parseInt(req.body.investment_amount),
+
+      // created_same_investment_ealier: check_created_same_investment_earlier(),
+      // prev_investment:
+      //   parseInt(user.prev_investment) <
+      //   parseInt(req.body.investment_amount / 2)
+      //     ? parseInt(req.body.investment_amount / 2)
+      //     : parseInt(user.prev_investment),
     });
     await user.save();
-    // console.log(user);
+    // console.log(user.parseInt);
     await create_investment(req);
 
     transporter.sendMail(

@@ -27,8 +27,9 @@ app.use("/api/admin/investment/fetch", admin_fetch_investment);
 const admin_cancel_investment = require("./admin_api/cancel_investment");
 app.use("/api/admin/investment/cancel", admin_cancel_investment);
 const admin_fetch_withdrawal = require("./admin_api/fetch_withdrawal");
-app.use("/api/admin/withdrawal/fetch", admin_fetch_withdrawal);
-
+app.use("/api/admin/withdrawal/fetch", admin_fetch_withdrawal)
+const raise_min_investment=require("./admin_api/upgrade_account")
+app.use("/api/admin/user/investment_min/raise", raise_min_investment);
 const login = require("./api/login");
 app.use("/api/user/login", login);
 const register = require("./api/register");

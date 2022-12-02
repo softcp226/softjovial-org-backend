@@ -25,14 +25,15 @@ Router.post("/", verifyToken, async (req, res) => {
           "the investment you requested to cancel no longer exist please refresh and try again",
       });
 
-    user.set({
-      final_balance: user.final_balance + parseInt(investment.amount),
-      // parseInt(investment.profit) -
-      // investment.loss,
-      active_investment: user.active_investment - investment.amount,
-    });
-    await user.save();
+        user.set({
+          final_balance: user.final_balance + parseInt(investment.amount),
+          // parseInt(investment.profit) -
+          // investment.loss,
+          active_investment:
+            parseInt(user.active_investment) - parseInt(investment.amount),
+        });
     await Investment.findByIdAndDelete(req.body.investment);
+    await user.save();
 
     res
       .status(200)
