@@ -37,6 +37,9 @@ app.use("/api/newuser/register", register);
 const complete_registration = require("./api/complete-registration");
 app.use("/api/new_user/complete_registration", complete_registration);
 
+const fetch_referral=require("./api/fetch_referrals")
+app.use("/api/user/referral/fetch",fetch_referral)
+
 const find_user = require("./api/find_user");
 app.use("/api/user/find", find_user);
 const create_new_deposit = require("./api/deposit_request");
@@ -63,3 +66,6 @@ const reset_password = require("./api/reset-password");
 app.use("/api/user/password/reset", reset_password);
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`running on port ${port}`));
+
+
+// ref

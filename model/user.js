@@ -37,11 +37,11 @@ const userSchema = mongoose.Schema({
     default: 0,
   },
   referral_link: String,
-  has_made_deposit: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
+  // has_made_deposit: {
+  //   type: Boolean,
+  //   required: true,
+  //   default: false,
+  // },
   referral: String,
   // created_basic_investment_more_than_once: {
   //   type: Number,
@@ -49,8 +49,29 @@ const userSchema = mongoose.Schema({
   // },
   min_investment: {
     type: Number,
-    required:true,
+    required: true,
     default: 0,
+  },
+  made_first_deposit: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  first_deposit: {
+    type: Number,
+    default: 0,
+    required: true,
+
+
+
+
+
+
+
+
+
+
+    
   },
   // created_same_investment_ealier: {
   //   type: Number,

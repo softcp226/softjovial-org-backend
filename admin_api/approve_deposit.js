@@ -56,9 +56,11 @@ Router.post("/", verifyToken, async (req, res) => {
           "the user that made the deposit you are trying to approve no longer exist",
       });
 
-    const referral = await User.findOne({ email: user.referral });
+      if(user.made_first_deposit !=true){
+
+    const referral = await User.findById(user.referral);
     if (referral) {
-      const mypercentage = (parseInt(req.body.deposit_amount) / 100) * 10;
+      const mypercentage =(parseInt(req.body.deposit_amount) / 100) * 10;
       referral.set({
         final_balance:
           parseInt(referral.final_balance) + parseInt(mypercentage),
@@ -85,11 +87,20 @@ Router.post("/", verifyToken, async (req, res) => {
         },
       );
     }
+  
+  
+  //end   //
+}
     // let bonus = parseInt(req.body.deposit_amount) / 2;
     user.set({
       final_balance:
         parseInt(user.final_balance) + parseInt(req.body.deposit_amount),
-      has_made_deposit: true,
+      // has_made_deposit: true,
+      made_first_deposit: true,
+      first_deposit:
+        user.first_deposit > 0
+          ? user.first_deposit
+          : parseInt(req.body.deposit_amount),
     });
     transaction.set({ status: "success" });
   

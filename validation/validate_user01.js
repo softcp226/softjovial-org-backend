@@ -5,7 +5,7 @@ const validate_user01 = (req) => {
     Email: Joi.string().email().required().max(1000),
     phone_number: Joi.string().required().max(1000),
     country: Joi.string().required().max(1000),
-    referral: Joi.string(),
+    referral: Joi.string().allow(""),
   });
 
   const result = schema.validate({
