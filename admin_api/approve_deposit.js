@@ -47,6 +47,7 @@ Router.post("/", verifyToken, async (req, res) => {
         errMessage:
           "the deposit you requested to approve is not associated with a transaction",
       });
+    console.log(deposit_request.user);
     const user = await User.findById(deposit_request.user);
 
     if (!user)
@@ -56,41 +57,54 @@ Router.post("/", verifyToken, async (req, res) => {
           "the user that made the deposit you are trying to approve no longer exist",
       });
 
-      if(user.made_first_deposit !=true){
+    if (user.made_first_deposit != true) {
+      // Requiring ObjectId from mongoose npm package
+      const ObjectId = require("mongoose").Types.ObjectId;
 
-    const referral = await User.findById(user.referral);
-    if (referral) {
-      const mypercentage =(parseInt(req.body.deposit_amount) / 100) * 10;
-      referral.set({
-        final_balance:
-          parseInt(referral.final_balance) + parseInt(mypercentage),
-        referral_bonus:
-          parseInt(referral.referral_bonus) + parseInt(mypercentage),
-      });
-      referral.save();
-      transporter2.sendMail(
-        create_mail_options2({
-          first_name: referral.first_name,
-          last_name: referral.last_name,
-          reciever: referral.email,
-          referral_amount: `$${mypercentage
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.0`,
-        }),
-        (err, info) => {
-          if (err) return console.log(err.message);
-          console.log(info);
-          // return res.status(400).json({
-          //   error: true,
-          //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
-          // });
-        },
-      );
+      // Validator function
+      function isValidObjectId(id) {
+        if (ObjectId.isValid(id)) {
+          if (String(new ObjectId(id)) === id) return true;
+          return false;
+        }
+        return false;
+      }
+      if (isValidObjectId(user.referral)) {
+        const referral = await User.findById(user.referral);
+        if (referral) {
+          const mypercentage = (parseInt(req.body.deposit_amount) / 100) * 10;
+          referral.set({
+            final_balance:
+              parseInt(referral.final_balance) + parseInt(mypercentage),
+            referral_bonus:
+              parseInt(referral.referral_bonus) + parseInt(mypercentage),
+          });
+          referral.save();
+          transporter2.sendMail(
+            create_mail_options2({
+              first_name: referral.first_name,
+              last_name: referral.last_name,
+              reciever: referral.email,
+              referral_amount: `$${mypercentage
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.0`,
+            }),
+            (err, info) => {
+              if (err) return console.log(err.message);
+              console.log(info);
+              // return res.status(400).json({
+              //   error: true,
+              //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
+              // });
+            },
+          );
+        } else {
+          console.log("not a valid objectID");
+        }
+
+        //end   //
+      }
     }
-  
-  
-  //end   //
-}
     // let bonus = parseInt(req.body.deposit_amount) / 2;
     user.set({
       final_balance:
@@ -103,7 +117,6 @@ Router.post("/", verifyToken, async (req, res) => {
           : parseInt(req.body.deposit_amount),
     });
     transaction.set({ status: "success" });
-  
 
     // const total_deposit = await Total_deposit.find();
     // total_deposit[0].set({
@@ -112,7 +125,6 @@ Router.post("/", verifyToken, async (req, res) => {
     //     parseInt(req.body.deposit_amount),
     // });
     // await total_deposit.save();
-
 
     await Deposit_request.findByIdAndDelete(req.body.deposit_request);
 
