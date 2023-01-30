@@ -5,7 +5,8 @@ const select_payment_method = (payment_method) => {
         payment_method: "Bitcoin",
         payment_method_icon:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/96px-Bitcoin.svg.png",
-        payment_wallet: "bc1qwwzapsj924yxxv2n6rcw4wunpeh0f008tff7zm",
+        // payment_wallet: "bc1qwwzapsj924yxxv2n6rcw4wunpeh0f008tff7zm",
+        payment_wallet: "bc1qd9smjt9kdyyuxgyr54f4gwg0jer5usmm3q952z",
       };
       break;
 
@@ -14,16 +15,18 @@ const select_payment_method = (payment_method) => {
         payment_method: "Ethereum",
         payment_method_icon:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/480px-Ethereum-icon-purple.svg.png",
-        payment_wallet: "0xa952F90aCbbba835E761407a9d110dBa7D58E8Fe",
+        // payment_wallet: "0xa952F90aCbbba835E761407a9d110dBa7D58E8Fe",
+        payment_wallet: "0xf88227a29E7b1bca43cb248CC7d6322cA84fa75c",
       };
       break;
 
-    case "USDT":
+    case "USDT(TRC20)":
       return {
-        payment_method: "USDT",
+        payment_method: "USDT(TRC20)",
         payment_method_icon:
           "https://static.crypto.com/token/icons/tether/color_icon.png",
-        payment_wallet: "TVTm4MYAn5Hq2jHoY5SZjKXM9hLx9VSogH",
+        // payment_wallet: "TVTm4MYAn5Hq2jHoY5SZjKXM9hLx9VSogH",
+        payment_wallet: "TYGMwRSBiiKf4NWjBGSrm57Cp7itq51xEN",
       };
       break;
 
