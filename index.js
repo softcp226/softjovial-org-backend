@@ -6,7 +6,7 @@ const cors = require("cors");
 app.use(cors());
 
 // app.use("/", express.static("html"));
-
+// /api/user/referral/fetch
 // app.use("/admin", express.static("admin"));
 
 const admin_login = require("./admin_api/login");

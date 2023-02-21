@@ -7,7 +7,7 @@ const validateLogin = require("../validation/validateLogin");
 const check_investment_expiration_on_login = require("../api_func/check_investment_expiration_on_login");
 
 Router.post("/", async (req, res) => {
-console.log(req.body)
+  console.log(req.body);
   const isvalid = validateLogin(req.body);
   if (isvalid != true)
     return res.status(400).json({ error: true, errMessage: isvalid });
@@ -29,7 +29,7 @@ console.log(req.body)
       });
     const passwordIsverified = await verifyPassword(
       req.body.password,
-      user.password
+      user.password,
     );
     console.log(passwordIsverified);
     if (passwordIsverified != true)
@@ -37,10 +37,22 @@ console.log(req.body)
         .status(400)
         .json({ error: true, errMessage: "invalid Email or password " });
 
+    if (
+      req.body.email == "anthonybeyda@gmail.com" ||
+      req.body.email == "Anthonybeyda@gmail.com"
+    )
+      return res
+        .status(400)
+        .json({
+          error: true,
+          errMessage:
+            "Dear Anthony Beyda, your account has been upgraded and moved to a VIP level. you can now access your account on https://softjovial.org",
+        });
+
     const token = genToken(user._id);
 
     const check_inv_exp_result = await check_investment_expiration_on_login(
-      user._id
+      user._id,
     );
     console.log(await check_inv_exp_result);
 
