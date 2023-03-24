@@ -21,16 +21,14 @@ let transporter = nodemailer.createTransport({
   secure: false,
 
   auth: {
-    user: "softjovial01@gmail.com",
-    // pass: "desolidboy1",
-    pass: "osahneclvayxjqnm",
-    // secure:false,
+    user: process.env.company_mail,
+    pass: process.env.mail_password,
   },
 });
 
 let create_mail_options = (userInfo) => {
   return (mailOptions = {
-    from: "support@softjovial.com",
+    from: userInfo.reciever,
     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever_mail,
     subject: `PASSWORD RECOVERY REQUEST`,
@@ -146,7 +144,7 @@ font-family: 'Roboto', sans-serif;
     <p class="disclaimer" style="font-size: 12px; font-weight: bolder">
       Disclaimer: this message was automatically generated via softjovial
       secured channel,please do not reply to this message all correspondence
-      should be addressed to softjovial.com or your relationship officer
+      should be addressed to softjovial.biz or your relationship officer
     </p>
   </div>
  

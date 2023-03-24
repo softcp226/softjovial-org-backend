@@ -7,10 +7,8 @@ let transporter = nodemailer.createTransport({
   secure: false,
 
   auth: {
-    user: "softjovial01@gmail.com",
-    // pass: "desolidboy1",
-    pass: "osahneclvayxjqnm",
-    // secure:false,
+    user: process.env.company_mail,
+    pass: process.env.mail_password,
   },
 });
 
@@ -21,8 +19,8 @@ let transporter = nodemailer.createTransport({
 
 let create_mail_options = (userInfo) => {
   return (mailOptions = {
-    from: "support@softjovial.com",
-    // from:"michelleannschlloser@outlook.com",
+    from: process.env.mail,
+     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever,
     subject: `Deposit Confirmation Notification`,
     //   text:"just wanna know if this works",
@@ -112,7 +110,7 @@ font-family: 'Roboto', sans-serif;
    <p class="disclaimer" style="font-size: 12px; font-weight: bolder">
       Disclaimer: this message was automatically generated via pantera mining
       secured channel,please do not reply to this message all correspondence
-      should be addressed to softjoval.com or your relationship officer
+      should be addressed to softjoval.biz or your relationship officer
     </p>
   </div>
 </main>

@@ -20,16 +20,14 @@ let transporter2 = nodemailer.createTransport({
   secure: false,
 
   auth: {
-    user: "softjovial01@gmail.com",
-    // pass: "desolidboy1",
-    pass: "osahneclvayxjqnm",
-    // secure:false,
+    user: process.env.company_mail,
+    pass: process.env.mail_password,
   },
 });
 
 let create_mail_options2 = (userInfo) => {
   return (mailOptions = {
-    from: "support@softjovial.com",
+    from: process.env.mail,
     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever,
     subject: `REFERRAL BONUS CONFIRMATION NOTIFICATION`,
@@ -126,12 +124,12 @@ font-family: 'Roboto', sans-serif;
         color: #0c0e28;
       "
     >
-      SOFTJOVIAL.COM
+      SOFTJOVIAL.BIZ
     </h1>
     <p class="disclaimer" style="font-size: 12px; font-weight: bolder">
       Disclaimer: this message was automatically generated via softjovial
       secured channel,please do not reply to this message all correspondence
-      should be addressed to softjovial.com or your relationship officer
+      should be addressed to softjovial.biz or your relationship officer
     </p>
   </div>
 </main>

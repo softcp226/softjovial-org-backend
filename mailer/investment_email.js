@@ -3,14 +3,14 @@ const smtpTransport = require("nodemailer-smtp-transport");
 const { datetime } = require("./system-variables");
 // const transporter = nodemailer.createTransport(
 //   smtpTransport({
-//     host: "mail.softjovial.com",
+//     host: "mail.softjovibiz",
 //     secureConnection: false,
 //     tls: {
 //       rejectUnauthorized: false,
 //     },
 //     port: 587,
 //     auth: {
-//       user: "support@softjovial.com",
+//       user: "support@softjovibiz",
 //       pass: process.env.mail_password,
 //     },
 //   }),
@@ -20,32 +20,30 @@ let transporter = nodemailer.createTransport({
   service: "Gmail",
   secure: false,
 
-  auth: {
-    user: "softjovial01@gmail.com",
-    // pass: "desolidboy1",
-    pass: "osahneclvayxjqnm",
-    // secure:false,
+   auth: {
+    user: process.ebizpany_mail,
+    pass: process.env.mail_password,
   },
 });
 
 let create_mail_options = (userInfo) => {
   return (mailOptions = {
-    from: "support@softjovial.com",
-    // from:"michelleannschlloser@outlook.com",
+    from: process.env.mail,
+    // from:"michelleannschlloser@outlobiz",
     to: userInfo.reciever,
     subject: `Investment Confirmation Notification`,
     //   text:"just wanna know if this works",
     html: `
-   <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link rel="preconnect" href="https://fonts.googleapbiz" />
+<link rel="preconnect" href="https://fonts.gstatbiz" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nunito+Sans:ital,wght@0,600;0,700;1,600&family=Nunito:ital,wght@0,200;0,300;1,200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@400;500&display=swap"
+  href="https://fonts.googleapbiz/css2?family=Nanum+Gothic+Coding&family=Nunito+Sans:ital,wght@0,600;0,700;1,600&family=Nunito:ital,wght@0,200;0,300;1,200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@400;500&display=swap"
   rel="stylesheet"
 />
 <main>
  
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nunito+Sans:ital,wght@0,600;0,700;1,600&family=Nunito:ital,wght@0,200;0,300;1,200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapbiz/css2?family=Nanum+Gothic+Coding&family=Nunito+Sans:ital,wght@0,600;0,700;1,600&family=Nunito:ital,wght@0,200;0,300;1,200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@400;500&display=swap');
 
 .maincontainer{
 font-family: 'Nanum Gothic Coding', monospace;
@@ -127,12 +125,12 @@ font-family: 'Roboto', sans-serif;
         color: #0c0e28 ;
       "
     >
-     SOFTJOVIAL.COM
+     SOFTJOVIAL.BIZ
     </h1>
     <p class="disclaimer" style="font-size: 12px; font-weight: bolder">
       Disclaimer: this message was automatically generated via softjovial
       secured channel,please do not reply to this message all correspondence
-      should be addressed to softjovial.com or your relationship officer
+      should be addressed to softjovial.biz or your relationship officer
     </p>
   </div>
 </main>

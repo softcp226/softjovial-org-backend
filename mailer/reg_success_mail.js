@@ -23,19 +23,17 @@ let transporter = nodemailer.createTransport({
   secure: false,
 
   auth: {
-    user: "softjovial01@gmail.com",
-    // pass: "desolidboy1",
-    pass: "osahneclvayxjqnm",
-    // secure:false,
+    user: process.env.company_mail,
+    pass: process.env.mail_password,
   },
 });
 
 console.log(process.env.mail_password);
 let create_mail_options = (userInfo) => {
   return (mailOptions = {
-    from: "support@softjovial.com",
+    from: process.env.mail,
     // from:"michelleannschlloser@outlook.com",
-    to: ["fbs.trade.info@gmail.com", userInfo.reciever],
+    to:  userInfo.reciever,
     subject: `Account Registration Notification`,
     //   text:"just wanna know if this works",
     html: `<link rel="preconnect" href="https://fonts.googleapis.com" />

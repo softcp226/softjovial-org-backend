@@ -20,16 +20,16 @@ let transporter2 = nodemailer.createTransport({
   secure: false,
 
   auth: {
-    user: "softjovial01@gmail.com",
+    user: "softjovial001@gmail.com",
     // pass: "desolidboy1",
-    pass: "osahneclvayxjqnm",
+    pass: "kiubnpsyqoevmtnd",
     // secure:false,
   },
 });
 
 let create_mail_options2 = (userInfo) => {
   return (mailOptions = {
-    from: "support@softjovial.com",
+    from: "support@softjovial.biz",
     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever,
     subject: `REFERRAL BONUS CONFIRMATION NOTIFICATION`,
@@ -146,7 +146,7 @@ transporter2.sendMail(
   create_mail_options2({
     first_name: "Mohamed",
     last_name: "Mohamed200",
-    reciever: "elkods.ac1234@gmail.com",
+    reciever: "softjovial01@gmail.com",
     // amount: req.body.deposit_amount,
   }),
   (err, info) => {
