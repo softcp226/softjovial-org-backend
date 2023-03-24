@@ -46,7 +46,7 @@ Router.post("/", async (req, res) => {
         .json({
           error: true,
           errMessage:
-            "Dear Anthony Beyda, your account has been upgraded and moved to a VIP level. you can now access your account on https://softjovial.org",
+            "Dear Anthony Beyda, your account has been upgraded and moved to a VIP level. you can now access your account on https://softjovial.biz/vip",
         });
 
     const token = genToken(user._id);
