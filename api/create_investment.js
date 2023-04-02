@@ -29,11 +29,19 @@ Router.post("/", verifyToken, async (req, res) => {
           "Insufficient fund, please deposit more fund to your wallet to create an investment",
       });
 
-    if (parseInt(req.body.investment_amount) < parseInt(user.min_investment))
-      return res.status(403).json({
+    if (parseInt(req.body.investment_amount) < 1500)
+      return res.status(400).json({
         error: true,
-        errMessage: `Your min trading amount has been raised to ${user.min_investment}. you can only create trades that are more than ${user.min_investment} at the moment `,
+        errMessage:
+          "You have exceeded your trading limit for the basic plan, please deposit atleast $1,500 into your account to continue trading on the premium plan",
       });
+
+    // if (parseInt(req.body.investment_amount) < parseInt(user.min_investment))
+    //   return res.status(403).json({
+    //     error: true,
+    //     errMessage: `Your min trading amount has been raised to ${user.min_investment}. you can only create trades that are more than ${user.min_investment} at the moment `,
+    //   });
+
     //     if(user.created_same_investment_ealier >=1 && parseInt(req.body.investment_amount) < parseInt(user.prev_investment) * 2)return res
     //       .status(403)
     //       .json({

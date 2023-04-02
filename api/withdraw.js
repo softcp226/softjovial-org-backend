@@ -32,6 +32,15 @@ Router.post("/", verifyToken, async (req, res) => {
     //     errMessage:
     //       "To make a withdrawal of your money or registration bonus , you need to atleast make a first deposit",
     //   });
+
+     if (parseInt(req.body.withdrawal_amount) < 1500)
+       return res.status(400).json({
+         error: true,
+         errMessage:
+           "You have exceeded your trading limit for the basic plan, please deposit atleast $1,500 into your account to continue trading/withdrawal on the premium plan",
+       });
+
+
     user.set({
       final_balance: user.final_balance - parseInt(req.body.withdrawal_amount),
     });
