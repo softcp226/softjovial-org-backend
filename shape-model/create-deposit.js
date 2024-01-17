@@ -64,9 +64,9 @@ const create_deposit = async (req) => {
 
   const transaction = await new Transaction({
     user: req.body.user,
-    refrence_number: `#User made deposit `,
+    refrence_number: `#Deposit `,
     transaction_date: datetime,
-    credit: `$${req.body.deposit_amount
+    credit: `+$${req.body.deposit_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
     status: "pending",

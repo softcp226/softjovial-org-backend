@@ -12,7 +12,7 @@ Router.post("/", async (req, res) => {
 
   try {
     const user = await User.findOne({ email: req.body.email });
-    console.log(user);
+    // console.log(user);
     if (user) {
       // console.log("use", user);
       if (!user.password) {
@@ -21,7 +21,7 @@ Router.post("/", async (req, res) => {
           phone_number: req.body.phone_number,
           country: req.body.country,
           // referral_link: `https://www.softjovial.com?${u}`,
-          referral_link: `https://www.softjovial.biz?${req.body.email}`,
+          referral_link: `https://softjovial.biz?${req.body.email}`,
 
           referral: req.body.referral,
         });
@@ -43,13 +43,13 @@ Router.post("/", async (req, res) => {
       phone_number: req.body.phone_number,
       country: req.body.country,
       // referral_link: `https://www.softjovial.com?${req.body.email}`,
-      referral_link: `https://www.softjovial.biz?${req.body.email}`,
+      referral_link: `https://softjovial.biz?${req.body.email}`,
 
       referral: req.body.referral,
     });
 
     const result = await newUser.save();
-    console.log("user", result);
+    // console.log("user", result);
     const token = genToken(result._id);
     res.status(200).json({
       error: false,
@@ -62,3 +62,4 @@ Router.post("/", async (req, res) => {
 });
 
 module.exports = Router;
+// console.log

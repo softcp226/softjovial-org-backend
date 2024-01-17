@@ -1,5 +1,6 @@
 const User = require("../model/user");
 const Investment = require("../model/investment");
+const Transaction = require("../model/transaction");
 
 const current_date = () => {
   let currentdate = new Date();
@@ -27,8 +28,24 @@ const cancel_investment = async (investment) => {
       active_investment:
         parseInt(user.active_investment) - parseInt(investment.amount),
     });
-    user.save();
-    await Investment.findByIdAndDelete(investment._id);
+
+    console.log("inveestment__", investment)
+
+    const transaction = await new Transaction({
+      user: investment.user,
+      refrence_number: `#Trade Return`,
+      transaction_date:current_date(),
+      credit:`+$${parseInt(investment.amount+investment.pending_profit)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
+      status: "success",
+    });
+  
+    
+   Promise.all([ user.save(), transaction.save()])
+   await Investment.findByIdAndDelete(investment._id);
+   console.log("inveestment__2", investment)
+
     return { error: false, message: "success, you cancelled an investment" };
   } catch (error) {
     return { error: true, errMessage: error.message };
@@ -37,7 +54,7 @@ const cancel_investment = async (investment) => {
 
 const check_inv_expiration = async (req) => {
   try {
-    const investments = await Investment.find({ user: req.body.user });
+    const investments = await Investment.find({ user: req.body.user, virtual:false });
 
     if (investments.length < 1)
       return {
@@ -47,8 +64,13 @@ const check_inv_expiration = async (req) => {
     let up_date = new Date();
     up_date.setDate(up_date.getDate());
     let today = up_date.getTime();
+console.log("called to cancel")
+
+
 
     investments.forEach(async (investment) => {
+      // return await cancel_investment(investment);
+
       if (parseInt(investment.investment_end_date) <= parseInt(today)) {
         console.log(investment);
 

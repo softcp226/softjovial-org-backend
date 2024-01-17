@@ -16,7 +16,7 @@ Router.post("/", verifyToken, async (req, res) => {
         error: true,
         errMessage: "invalid request, please login to view your transactions",
       });
-    const transactions = await Transaction.find({ user: req.body.user,virtual:false });
+    const transactions = await Transaction.find({ user: req.body.user,virtual:true });
     if (transactions.length < 1)
       return res.status(404).json({
         error: true,
@@ -25,11 +25,10 @@ Router.post("/", verifyToken, async (req, res) => {
     res.status(200).json({
       error: false,
       message: transactions,
-      user_balance: user.final_balance,
+      user_balance: user.virtual_final_balance,
     });
   } catch (error) {
     res.status(400).json({ error: true, errMessage: error.message });
   }
 });
 module.exports = Router;
-

@@ -9,6 +9,8 @@ const investment_schema = mongoose.Schema({
     ref: "user",
     required: true,
   },
+ 
+  
   transaction_date: {
     type: String,
     required: true,
@@ -52,6 +54,13 @@ const investment_schema = mongoose.Schema({
     required: true,
     default: false,
   },
+
+  virtual: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+ 
 });
 
 const Investment = mongoose.model("investment", investment_schema);

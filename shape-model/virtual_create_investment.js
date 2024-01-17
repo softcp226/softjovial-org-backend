@@ -1,6 +1,5 @@
 const Investment = require("../model/investment");
 const Transaction = require("../model/transaction");
-
 const select_investment_end_time = (req) => {
 
   switch (req.body.return_time) {
@@ -76,9 +75,10 @@ const create_investment = async (req) => {
     return_time: req.body.return_time,
     pending_profit: req.body.profit,
     investment_end_date: select_investment_end_time(req),
+    virtual:true
   });
 
-
+  
   const transaction = await new Transaction({
     user: req.body.user,
     refrence_number: `#Create Trade`,
@@ -87,6 +87,7 @@ const create_investment = async (req) => {
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
     status: "success",
+    virtual:true
   });
 
 

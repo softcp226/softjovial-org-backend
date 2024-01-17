@@ -3,7 +3,7 @@ const Router = express.Router();
 const User = require("../model/user");
 const verifyToken = require("../token/verifyToken");
 const validate_find_user = require("../validation/validate_find_user");
-const check_inv_expiration = require("../api_func/check_invest_exp");
+const check_inv_expiration = require("../api_func/check_virtual_invest_exp");
 
 Router.post("/", verifyToken, async (req, res) => {
   // console.log(req.body)
@@ -20,9 +20,8 @@ Router.post("/", verifyToken, async (req, res) => {
     });
 
   const check_inv_exp_result = await check_inv_expiration(req);
-  // console.log(await check_inv_exp_result);
+  console.log(await check_inv_exp_result);
 
   res.status(200).json({ error: false, message: user });
 });
 module.exports = Router;
-// console.log

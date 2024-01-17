@@ -3,14 +3,14 @@ const Router = express.Router();
 const User = require("../model/user");
 const verifyToken = require("../token/verifyToken");
 const validate_create_investment = require("../validation/validate-create-investment");
-const create_investment = require("../shape-model/create-investment");
+const create_investment = require("../shape-model/virtual_create_investment");
 const {
   create_mail_options,
   transporter,
 } = require("../mailer/investment_email");
 
 Router.post("/", verifyToken, async (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   const request_isvalid = validate_create_investment(req.body);
   if (request_isvalid != true)
     return res.status(400).json({ error: true, errMessage: request_isvalid });
@@ -22,11 +22,11 @@ Router.post("/", verifyToken, async (req, res) => {
         errMessage: "invalid request, please login to create an investment",
       });
 
-    if (parseInt(req.body.investment_amount) > user.final_balance)
+    if (parseInt(req.body.investment_amount) > user.virtual_final_balance)
       return res.status(400).json({
         error: true,
         errMessage:
-          "Insufficient fund, please deposit more fund to your wallet to create an investment",
+          "Insufficient fund on demo account, please switch to a real account to experience unlimted trading",
       });
 
     // if (parseInt(req.body.investment_amount) < 1500)
@@ -88,9 +88,9 @@ Router.post("/", verifyToken, async (req, res) => {
     //     // };
 
     user.set({
-      active_investment:
-        parseInt(user.active_investment) + parseInt(req.body.investment_amount),
-      final_balance: user.final_balance - parseInt(req.body.investment_amount),
+      virtual_active_investment:
+        parseInt(user.virtual_active_investment) + parseInt(req.body.investment_amount),
+      virtual_final_balance: user.virtual_final_balance - parseInt(req.body.investment_amount),
 
       // created_same_investment_ealier: check_created_same_investment_earlier(),
       // prev_investment:
@@ -110,8 +110,8 @@ Router.post("/", verifyToken, async (req, res) => {
         reciever: user.email,
       }),
       (err, info) => {
-        if (err) return "console.log(err.message);"
-        // console.log(info);
+        if (err) return console.log(err.message);
+        console.log(info);
         // return res.status(400).json({
         //   error: true,
         //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
@@ -124,7 +124,6 @@ Router.post("/", verifyToken, async (req, res) => {
       message: "success!, you just created an investment",
     });
   } catch (error) {
-    // console.log(error)
     res.status(400).json({ error: true, errMessage: error.message });
   }
 });

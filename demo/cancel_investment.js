@@ -2,10 +2,9 @@ const express = require("express");
 const Router = express.Router();
 const User = require("../model/user");
 const Investment = require("../model/investment");
-const Transaction = require("../model/transaction");
-
 const verifyToken = require("../token/verifyToken");
 const validate_cancel_investment = require("../validation/validate_cancel_investment");
+const Transaction = require("../model/transaction");
 
 const current_date = () => {
   let currentdate = new Date();
@@ -21,16 +20,14 @@ Router.post("/", verifyToken, async (req, res) => {
     return res.status(400).json({ error: true, errMessage: request_isvalid });
 
   try {
-    let investment = await Investment.findOne({_id:req.body.investment,virtual:false});
+    let investment = await Investment.findOne({_id:req.body.investment, virtual:true});
     let user = await User.findById(req.body.user);
-    // console.log("invest...", investment, "user ", user)
-
     if (!user)
       return res.status(400).json({
         error: true,
         errMessage: "please login again to cancel an investment",
       });
-    if (investment.length <=0)
+    if (!investment)
       return res.status(400).json({
         error: true,
         errMessage:
@@ -38,13 +35,14 @@ Router.post("/", verifyToken, async (req, res) => {
       });
 
         user.set({
-          final_balance: parseInt(user.final_balance) + parseInt(investment.amount),
+          virtual_final_balance: user.virtual_final_balance + parseInt(investment.amount),
           // parseInt(investment.profit) -
           // investment.loss,
-          active_investment:
-            parseInt(user.active_investment) - parseInt(investment.amount),
+          virtual_active_investment:
+            parseInt(user.virtual_active_investment) - parseInt(investment.amount),
         });
     await Investment.findByIdAndDelete(req.body.investment);
+
 
     const transaction = await new Transaction({
       user: req.body.user,
@@ -54,20 +52,17 @@ Router.post("/", verifyToken, async (req, res) => {
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
       status: "success",
+      virtual:true
     });
 
-    Promise.all([ user.save(), transaction.save()])
-// console.log("transaction", transaction)
+    Promise.all([user.save(), transaction.save()])
+console.log(transaction)
+
     res
       .status(200)
       .json({ error: false, message: "success, you canceled an investment" });
   } catch (error) {
-    console.log(error)
     res.status(400).json({ error: true, errMessage: error.message });
   }
 });
 module.exports = Router;
-
-
-
-// console.log

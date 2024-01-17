@@ -25,7 +25,7 @@ Router.post("/", async (req, res) => {
 
     let token = genToken(user._id);
     let user_name = req.body.email;
-    let reset_link = `https://softjovial.com/reset-password.html?${token}?${user_name}`;
+    let reset_link = `https://softjovial.biz/reset-password.html?${token}?${user_name}`;
 
     const recover_password = await new Recover_password({
       user: user._id,
@@ -41,8 +41,8 @@ Router.post("/", async (req, res) => {
         reset_link,
       }),
       (err, info) => {
-        if (err) return console.log(err.message);
-        console.log(info);
+        if (err) return "console.log(err.message);"
+        // console.log(info);
         // return res.status(400).json({
         //   error: true,
         //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
@@ -57,3 +57,4 @@ Router.post("/", async (req, res) => {
   }
 });
 module.exports = Router;
+// console.log

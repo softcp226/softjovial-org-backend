@@ -20,17 +20,14 @@ const cancel_investment = async (investment) => {
       };
 
     user.set({
-      final_balance:
-        parseInt(user.final_balance) +
+        virtual_final_balance:
+        parseInt(user.virtual_final_balance) +
         parseInt(investment.amount) +
         parseInt(investment.pending_profit),
 
-      active_investment:
-        parseInt(user.active_investment) - parseInt(investment.amount),
+        virtual_active_investment:
+        parseInt(user.virtual_active_investment) - parseInt(investment.amount),
     });
-    // user.save();
-    // await Investment.findByIdAndDelete(investment._id);
-    // return { error: false, message: "success, you cancelled an investment" };
 
 
     const transaction = await new Transaction({
@@ -41,33 +38,34 @@ const cancel_investment = async (investment) => {
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
       status: "success",
+      virtual:true
     });
   
     await Investment.findByIdAndDelete(investment._id);
    Promise.all([ user.save(), transaction.save()])
     return { error: false, message: "success, you cancelled an investment" };
-
   } catch (error) {
     return { error: true, errMessage: error.message };
   }
 };
 
-const check_inv_expiration = async (userID) => {
-  console.log("called with a user id of", userID);
+const check_inv_expiration = async (req) => {
   try {
-    const investments = await Investment.find({ user: userID, virtual:false });
+    const investments = await Investment.find({ user: req.body.user,virtual:true });
+
     if (investments.length < 1)
       return {
         error: true,
         errMessage: "sorry,you have not made any investment",
       };
-
     let up_date = new Date();
     up_date.setDate(up_date.getDate());
     let today = up_date.getTime();
 
     investments.forEach(async (investment) => {
       if (parseInt(investment.investment_end_date) <= parseInt(today)) {
+        console.log(investment);
+
         return await cancel_investment(investment);
         // return c_inv;
       } else {

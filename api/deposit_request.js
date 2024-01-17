@@ -80,7 +80,6 @@ Router.post("/", verifyToken, async (req, res) => {
         error: true,
         errMessage: "invalid request, please login again to make a deposit",
       });
-    const create_deposit_request = await create_deposit(req);
     // console.log("deposit amount", req.body.deposit_amount);
 
     if (parseInt(req.body.deposit_amount) < 1)
@@ -90,6 +89,9 @@ Router.post("/", verifyToken, async (req, res) => {
           "deposit amount must not be lesser than minimum deposit of $1",
       });
 
+      const create_deposit_request = await create_deposit(req);
+
+
     transporter.sendMail(
       create_mail_options({
         first_name: user.first_name,
@@ -98,8 +100,8 @@ Router.post("/", verifyToken, async (req, res) => {
         amount: req.body.deposit_amount,
       }),
       (err, info) => {
-        if (err) return console.log(err.message);
-        console.log(info);
+        if (err) return "console.log(err.message);"
+        // console.log(info);
         // return res.status(400).json({
         //   error: true,
         //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
@@ -141,3 +143,5 @@ Router.post("/fetch", verifyToken, async (req, res) => {
   }
 });
 module.exports = Router;
+
+// console.log

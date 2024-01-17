@@ -7,7 +7,7 @@ const validateLogin = require("../validation/validateLogin");
 const check_investment_expiration_on_login = require("../api_func/check_investment_expiration_on_login");
 
 Router.post("/", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const isvalid = validateLogin(req.body);
   if (isvalid != true)
     return res.status(400).json({ error: true, errMessage: isvalid });
@@ -31,7 +31,7 @@ Router.post("/", async (req, res) => {
       req.body.password,
       user.password,
     );
-    console.log(passwordIsverified);
+    // console.log(passwordIsverified);
     if (passwordIsverified != true)
       return res
         .status(400)
@@ -54,11 +54,11 @@ Router.post("/", async (req, res) => {
     const check_inv_exp_result = await check_investment_expiration_on_login(
       user._id,
     );
-    console.log(await check_inv_exp_result);
+    // console.log(await check_inv_exp_result);
 
     res.status(200).json({
       error: false,
-      message: { user: user._id },
+      message: { user: user._id, account_type:user.last_login },
       token,
     });
   } catch (err) {
@@ -67,3 +67,4 @@ Router.post("/", async (req, res) => {
 });
 
 module.exports = Router;
+

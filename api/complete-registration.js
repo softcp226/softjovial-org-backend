@@ -14,8 +14,8 @@ const genToken = require("../token/genToken");
 const fs = require("fs");
 
 Router.post("/", upload.any("passport"), verifyToken_01, async (req, res) => {
-  console.log(req.body);
-  console.log(req.files);
+  // console.log(req.body);
+  // console.log(req.files);
   const request_isvalid = validate_user(req.body);
   if (request_isvalid != true)
     return res.status(400).json({ error: true, errMessage: request_isvalid });
@@ -36,7 +36,7 @@ Router.post("/", upload.any("passport"), verifyToken_01, async (req, res) => {
       passport_url = newPath;
       fs.unlinkSync(path);
     }
-    console.log(passport_url);
+    // console.log(passport_url);
     if (passport_url.error)
       return res.status(400).json({
         error: true,
@@ -48,7 +48,7 @@ Router.post("/", upload.any("passport"), verifyToken_01, async (req, res) => {
 
     const user_result = user.set({
       // referral_link: user._id,
-      referral_link:`https://softjovial.com?${user._id}`,
+      referral_link:`https://softjovial.biz?${user._id}`,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       passport: passport_url.url,
@@ -64,8 +64,8 @@ Router.post("/", upload.any("passport"), verifyToken_01, async (req, res) => {
         reciever: user.email,
       }),
       (err, info) => {
-        if (err) return console.log(err.message);
-        console.log(info);
+        if (err) return "console.log(err.message);"
+        // console.log(info);
         // return res.status(400).json({
         //   error: true,
         //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
@@ -76,11 +76,14 @@ Router.post("/", upload.any("passport"), verifyToken_01, async (req, res) => {
     res
       .status(200)
       .json({ error: false, message: { user: user_result._id }, token });
-    console.log(user);
-    console.log("success");
+    // console.log(user);
+    // console.log("success");
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(400).json({ error: true, errMessage: error.message });
   }
 });
 module.exports = Router;
+
+
+// console.log

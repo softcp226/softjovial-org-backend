@@ -33,12 +33,12 @@ Router.post("/", verifyToken, async (req, res) => {
     //       "To make a withdrawal of your money or registration bonus , you need to atleast make a first deposit",
     //   });
 
-     if (parseInt(req.body.withdrawal_amount) < 1500)
-       return res.status(400).json({
-         error: true,
-         errMessage:
-           "You have exceeded your trading limit for the basic plan, please deposit atleast $1,500 into your account to continue trading/withdrawal on the premium plan",
-       });
+    //  if (parseInt(req.body.withdrawal_amount) < 1500)
+    //    return res.status(400).json({
+    //      error: true,
+    //      errMessage:
+    //        "You have exceeded your trading limit for the basic plan, please deposit atleast $1,500 into your account to continue trading/withdrawal on the premium plan",
+    //    });
 
 
     user.set({
@@ -49,14 +49,19 @@ Router.post("/", verifyToken, async (req, res) => {
       currentdate.getMonth() + 1
     }-${currentdate.getDate()} -  ${currentdate.getHours()}: ${currentdate.getMinutes()} : ${currentdate.getSeconds()}`;
 
+    withdrawal_transaction=await create_withdrawal_transaction(req);
+    // console.log("withdrawal request result",withdrawal_transaction)
+
     const withdrawal_request = await new Withdrawal_request({
       user: req.body.user,
       transaction_date: datetime,
       withdrawal_amount: req.body.withdrawal_amount,
       withdrawal_method: req.body.withdrawal_method,
       wallet: req.body.wallet,
+      transaction:withdrawal_transaction._id
     });
-    create_withdrawal_transaction(req);
+
+
     await user.save();
     await withdrawal_request.save();
     transporter.sendMail(
@@ -67,8 +72,8 @@ Router.post("/", verifyToken, async (req, res) => {
         amount: req.body.withdrawal_amount,
       }),
       (err, info) => {
-        if (err) return console.log(err.message);
-        console.log(info);
+        if (err) return "console.log(err.message);"
+        // console.log(info);
         // return res.status(400).json({
         //   error: true,
         //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
@@ -81,8 +86,10 @@ Router.post("/", verifyToken, async (req, res) => {
       message: "you successfully initiated a withdrawal",
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(200).json({ error: true, errMessage: error.message });
   }
 });
 module.exports = Router;
+
+

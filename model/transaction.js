@@ -17,6 +17,7 @@ const transaction_Schema = mongoose.Schema({
     required: true,
     // default: Date.now(),
   },
+ 
   debit: String,
   credit: String,
   status: {
@@ -24,6 +25,12 @@ const transaction_Schema = mongoose.Schema({
     required: true,
     enum: ["pending", "success", "failed"],
   },
+  virtual:{
+    type: Boolean,
+    required:true,
+    default:false
+
+  }
 });
 
 const Transaction = mongoose.model("transaction", transaction_Schema);

@@ -1,7 +1,8 @@
 require("dotenv").config();
-
-// const config = require("config");
 const mongoose = require("mongoose");
+
+mongoose.set("strictQuery", false);
+// const config = require("config");
 const connectDB = (message) => {
   const db_link = process.env.db_Url;
   // console.log(db_link);

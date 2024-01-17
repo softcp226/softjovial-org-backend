@@ -24,7 +24,15 @@ const userSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  virtual_final_balance:{
+    type: Number,
+    default: 1000,
+  },
   profit_loss: {
+    type: Number,
+    default: 0,
+  },
+  virtual_profit_loss:{
     type: Number,
     default: 0,
   },
@@ -32,6 +40,11 @@ const userSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  virtual_active_investment: {
+    type: Number,
+    default: 0,
+  },
+  
   referral_bonus: {
     type: Number,
     default: 0,
@@ -73,6 +86,13 @@ const userSchema = mongoose.Schema({
 
     
   },
+
+  last_login:{
+    type:String,
+    required:true,
+    default:"real_account",
+    enum:["demo_account", "real_account"]
+  }
   // created_same_investment_ealier: {
   //   type: Number,
   //   default: 0,

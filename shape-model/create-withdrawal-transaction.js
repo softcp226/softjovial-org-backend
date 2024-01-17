@@ -9,12 +9,12 @@ const create_withdrawal_transaction = async (req) => {
 
   const transaction = await new Transaction({
     user: req.body.user,
-    refrence_number: `Ref#${++ref} `,
+    refrence_number: `#Withdrawl `,
     transaction_date: datetime,
-    debit: `$${req.body.withdrawal_amount
+    debit: `-$${req.body.withdrawal_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
-    status: "success",
+    status: "pending",
   });
 
   await transaction.save();

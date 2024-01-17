@@ -10,7 +10,7 @@ const validate_complete_deposit = require("../validation/validate_complete_depos
 const Deposit_request = require("../model/deposit_request");
 
 Router.post("/", verifyToken, async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const request_isvalid = validate_complete_deposit(req.body);
   if (request_isvalid != true)
     return res.status(400).json({ error: true, errMessage: request_isvalid });
@@ -63,8 +63,8 @@ Router.post("/", verifyToken, async (req, res) => {
         reciever: user.email,
       }),
       (err, info) => {
-        if (err) return console.log(err.message);
-        console.log(info);
+        if (err) return "console.log(err.message);"
+        // console.log(info);
         // return res.status(400).json({
         //   error: true,
         //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
@@ -76,8 +76,9 @@ Router.post("/", verifyToken, async (req, res) => {
       .status(200)
       .json({ error: false, message: "successfully uploaded hash" });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(400).json({ error: true, errMessage: error.message });
   }
 });
 module.exports = Router;
+// console.log
