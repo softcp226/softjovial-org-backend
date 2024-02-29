@@ -24,6 +24,27 @@ const select_investment_end_time = (req) => {
     let end_date3 = date3.getTime();
     return end_date3;
 
+    
+    case "one_month_return" :
+      let date4 = new Date();
+ date4.setDate(date4.getDate() + 30);
+ let end_date4 = date4.getTime();
+ return end_date4;
+
+ case "three_months_return" :
+  let date5 = new Date();
+date5.setDate(date5.getDate() + 90);
+let end_date5= date5.getTime();
+return end_date5;
+
+
+case "six_months_return" :
+  let date6 = new Date();
+date6.setDate(date6.getDate() + 180);
+let end_date6= date6.getTime();
+return end_date6;
+
+
     default:
       let def_date = new Date();
       def_date.setDate(date.getDate() + 1);
