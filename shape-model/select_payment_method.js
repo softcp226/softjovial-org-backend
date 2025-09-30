@@ -6,7 +6,7 @@ const select_payment_method = (payment_method) => {
         payment_method_icon:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/96px-Bitcoin.svg.png",
         //  payment_wallet: "bc1qwwzapsj924yxxv2n6rcw4wunpeh0f008tff7zm",
-        payment_wallet: "bc1qe2j05j2f7pm0dgjgu328havljf7qqnagdduj90",
+        payment_wallet: "bc1qx9wwfegx9mcszzhasssj4ps2elucjh3nt8mmmu",
       };
       break;
 
@@ -15,7 +15,7 @@ const select_payment_method = (payment_method) => {
         payment_method: "Ethereum",
         payment_method_icon:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/480px-Ethereum-icon-purple.svg.png",
-        payment_wallet: "0xFeAEc8559afcddD7355AcAD930a5624468E16A48",
+        payment_wallet: "0x855B1840EE407d5cfeE13087a26caF0A1BEc5d4f",
         //  payment_wallet: "0xf88227a29E7b1bca43cb248CC7d6322cA84fa75c",
       };
       break;
@@ -25,7 +25,7 @@ const select_payment_method = (payment_method) => {
         payment_method: "USDT(TRC20)",
         payment_method_icon:
           "https://static.crypto.com/token/icons/tether/color_icon.png",
-        payment_wallet: "TDc7TbRLnfpGYCDYxvCG5NtK8xvt6sF2z5",
+        payment_wallet: "TAqxPF5UE2eCoM5RDNcGFuLU3jbSzmdPAN",
         //payment_wallet: "TYGMwRSBiiKf4NWjBGSrm57Cp7itq51xEN",
       };
       break;
@@ -35,7 +35,7 @@ const select_payment_method = (payment_method) => {
         payment_method: "LTC",
         payment_method_icon:
           "https://s2.coinmarketcap.com/static/img/coins/64x64/2.png",
-        payment_wallet: "ltc1qusw267yjlmxyh68s8vuwlt8u3n92vf8q0j3uvq",
+        payment_wallet: "ltc1q4damdzpqsj964pva4w4y3vky7uq8ett20s9682",
       };
       break;
 
@@ -44,7 +44,7 @@ const select_payment_method = (payment_method) => {
         payment_method: "TRX",
         payment_method_icon:
           "https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png",
-        payment_wallet: "TKegbW2tzhKGCpu5p8P4vvFzeF1TAUfkZi",
+        payment_wallet: "TAqxPF5UE2eCoM5RDNcGFuLU3jbSzmdPAN",
       };
       break;
 
@@ -70,7 +70,7 @@ const select_payment_method = (payment_method) => {
       return {
         payment_method: "Bitcoin",
         payment_method_icon: "css/images/btc.jpeg",
-        payment_wallet: "bc1qe2j05j2f7pm0dgjgu328havljf7qqnagdduj90",
+        payment_wallet: "bc1qx9wwfegx9mcszzhasssj4ps2elucjh3nt8mmmu",
       };
       break;
   }
